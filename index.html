@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0f1c">
+    <meta name="description" content="GitMusic – минималистичный музыкальный плеер на GitHub Pages.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%235f3dc9' cx='50' cy='50' r='45'/%3E%3Cpath fill='white' d='M40 35v30l20-15-20-15z'/%3E%3C/svg%3E">
+    <title>GitMusic – свой Spotify на GitHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>🎵 GitMusic</h1>
+            <p class="sub">минимализм. треки. везде</p>
+        </header>
+
+        <main>
+            <div class="player-card">
+                <div class="track-meta">
+                    <div class="track-title" id="currentTitle">—</div>
+                    <div class="track-artist" id="currentArtist">—</div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="time-group">
+                        <span id="currentTime">0:00</span>
+                        <div class="progress-bar" id="progressBar" role="slider" aria-label="Прогресс воспроизведения" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="ctrl-btn" id="prevBtn" aria-label="Предыдущий трек">⏮</button>
+                    <button class="ctrl-btn play-main" id="playPauseBtn" aria-label="Play / Pause">▶</button>
+                    <button class="ctrl-btn" id="nextBtn" aria-label="Следующий трек">⏭</button>
+                </div>
+
+                <div class="volume-row">
+                    <span class="volume-icon" aria-hidden="true">🔊</span>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" aria-label="Громкость">
+                </div>
+            </div>
+
+            <section class="playlist-section">
+                <h2 class="playlist-heading">🎧 плейлист</h2>
+                <div class="playlist" id="playlistContainer" role="list" aria-label="Список треков">
+                    <div class="loading-state">загрузка треков...</div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>GitMusic — твоя музыка на GitHub Pages</p>
+        </footer>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata" aria-label="Аудиоплеер"></audio>
+
+    <script src="script.js" defer></script>
+    <script>
+        // Регистрация Service Worker для офлайн-доступа
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+                console.log('SW registered:', reg);
+            }).catch(err => console.log('SW failed:', err));
+        }
+    </script>
+</body>
+</html>
