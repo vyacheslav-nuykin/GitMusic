@@ -301,3 +301,33 @@ button:focus-visible,
     outline: 3px solid var(--accent);
     outline-offset: 2px;
 }
+
+
+/* активное состояние для shuffle и repeat */
+.ctrl-btn.active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 6px var(--accent);
+}
+
+.ctrl-btn.repeat-one {
+    background: var(--accent);
+    color: white;
+    position: relative;
+}
+.ctrl-btn.repeat-one::after {
+    content: "1";
+    font-size: 0.7rem;
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: white;
+    color: black;
+    width: 14px;
+    height: 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
